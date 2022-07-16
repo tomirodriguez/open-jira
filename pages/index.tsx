@@ -1,11 +1,9 @@
+import { Typography } from '@mui/material';
 import type { NextPage } from 'next';
+import { Layout } from '../components/layouts';
 
 const HomePage: NextPage = () => {
-  return (
-    <div>
-      <h1>Open Jira</h1>
-    </div>
-  );
+  return <Layout></Layout>;
 };
 
 export default HomePage;
