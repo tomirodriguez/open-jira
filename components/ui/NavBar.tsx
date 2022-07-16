@@ -1,13 +1,21 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { FC } from 'react';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-type Props = {};
 
-export const NavBar: FC<Props> = ({}) => {
+type Props = {
+  onBurguerClick: () => void;
+};
+
+export const NavBar: FC<Props> = ({ onBurguerClick }) => {
   return (
     <AppBar position="sticky" elevation={0}>
       <Toolbar>
-        <IconButton size="large" edge="start" sx={{ color: 'Background' }}>
+        <IconButton
+          size="large"
+          edge="start"
+          sx={{ color: 'Background' }}
+          onClick={onBurguerClick}
+        >
           <MenuOutlinedIcon />
         </IconButton>
         <Typography
