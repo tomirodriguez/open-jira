@@ -5,7 +5,7 @@ import { Layout } from '../components/layouts';
 const HomePage: NextPage = () => {
   return (
     <Layout title="Home - OpenJira">
-      <Grid container spacing={2} height="100%">
+      <Grid container spacing={2} flexGrow={1}>
         <Grid item xs={12} sm={4} display="flex" alignItems={'stretch'}>
           <Card sx={{ width: '100%' }}>
             <CardHeader title="Pendientes" />

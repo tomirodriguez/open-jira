@@ -36,7 +36,16 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
 
       <NavBar onBurguerClick={handleBurguerClick} />
       <SideMenu isOpen={sideMenuOpen} onClose={handleSideMenuClose} />
-      <Box sx={{ padding: '10px 20px' }}>{children}</Box>
+      <Box
+        sx={{
+          padding: '10px 20px',
+          flexGrow: 1,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {children}
+      </Box>
     </Box>
   );
 };
