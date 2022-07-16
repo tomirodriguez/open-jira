@@ -22,7 +22,14 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   };
 
   return (
-    <Box sx={{ flexFlow: 1 }}>
+    <Box
+      sx={{
+        flexFlow: 1,
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Head>
         <title>{title}</title>
       </Head>
