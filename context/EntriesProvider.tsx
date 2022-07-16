@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren, useReducer } from 'react';
+import { ENTRIES_MOCK } from '../mocks';
 import { Entry } from '../types';
 import { EntriesContext, entriesReducer } from './';
 
@@ -7,7 +8,7 @@ export interface EntriesState {
 }
 
 const Entries_INITIAL_STATE: EntriesState = {
-  entries: [],
+  entries: ENTRIES_MOCK,
 };
 
 export const EntriesProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
