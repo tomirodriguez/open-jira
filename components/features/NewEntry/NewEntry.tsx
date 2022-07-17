@@ -17,6 +17,7 @@ export const NewEntry: FC<Props> = ({}) => {
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTouched(true);
     setEntryDescription(event.target.value);
   };
 
@@ -50,7 +51,6 @@ export const NewEntry: FC<Props> = ({}) => {
             error={hasError}
             value={entryDescription}
             onChange={handleInputChange}
-            onBlur={() => setTouched(true)}
           ></TextField>
 
           <Box display="flex" justifyContent={'space-between'}>
