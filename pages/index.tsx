@@ -1,4 +1,4 @@
-import { Card, CardHeader, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import type { NextPage } from 'next';
 import { Layout } from '../components/layouts';
 import { EntryList } from '../components/ui';
@@ -10,28 +10,9 @@ const HomePage: NextPage = () => {
   return (
     <Layout title="Home - OpenJira">
       <Grid container spacing={2} flexGrow={1}>
-        <Grid item xs={12} sm={4} display="flex" alignItems={'stretch'}>
-          <Card
-            sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
-          >
-            <CardHeader title="Pendientes" />
-            <EntryList entries={pending} />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={4} display="flex" alignItems={'stretch'}>
-          <Card sx={{ width: '100%' }}>
-            <CardHeader title="En progreso" />
-            <EntryList entries={inProgress} />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={4} display="flex" alignItems={'stretch'}>
-          <Card sx={{ width: '100%' }}>
-            <CardHeader title="Completadas" />
-            <EntryList entries={finished} />
-          </Card>
-        </Grid>
+        <EntryList title="Pending" entries={pending} />
+        <EntryList title="In Progress" entries={inProgress} />
+        <EntryList title="Finished" entries={finished} />
       </Grid>
     </Layout>
   );
