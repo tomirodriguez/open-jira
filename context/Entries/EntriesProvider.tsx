@@ -1,8 +1,7 @@
 import { FC, PropsWithChildren, useReducer } from 'react';
-import { ENTRIES_MOCK } from '../mocks';
-import { Entry } from '../types';
+import { ENTRIES_MOCK } from '../../mocks';
+import { Entry } from '../../types';
 import { EntriesContext, entriesReducer } from './';
-import { v4 as uuid } from 'uuid';
 
 export interface EntriesState {
   entries: Entry[];
@@ -15,15 +14,12 @@ const Entries_INITIAL_STATE: EntriesState = {
 export const EntriesProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE);
 
-  const addNewEntry = (description: string) => {
-    const newEntry: Entry = {
-      _id: uuid(),
-      description,
-      createdAt: Date.now(),
-      status: 'pending',
-    };
+  const addNewEntry = (entry: Entry) => {
+    dispatch({ type: '[Entry] - Add-Entry', payload: entry });
+  };
 
-    dispatch({ type: '[Entry] - Add-Entry', payload: newEntry });
+  const updateEntry = (entry: Entry) => {
+    dispatch({ type: '[Entry] - Update Entry', payload: entry });
   };
 
   return (
@@ -31,6 +27,7 @@ export const EntriesProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
       value={{
         ...state,
         addNewEntry,
+        updateEntry,
       }}
     >
       {children}

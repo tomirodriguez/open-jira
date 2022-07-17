@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import type { NextPage } from 'next';
 import { Layout } from '../components/layouts';
-import { EntryList } from '../components/ui';
+import { EntryList } from '../components/features';
 import { useEntries } from '../hooks/useEntries';
 
 const HomePage: NextPage = () => {
@@ -10,9 +10,13 @@ const HomePage: NextPage = () => {
   return (
     <Layout title="Home - OpenJira">
       <Grid container spacing={2} flexGrow={1}>
-        <EntryList title="Pending" entries={pending} />
-        <EntryList title="In Progress" entries={inProgress} />
-        <EntryList title="Finished" entries={finished} />
+        <EntryList title="Pending" entries={pending} status={'pending'} />
+        <EntryList
+          title="In Progress"
+          entries={inProgress}
+          status={'in-progress'}
+        />
+        <EntryList title="Finished" entries={finished} status="finished" />
       </Grid>
     </Layout>
   );

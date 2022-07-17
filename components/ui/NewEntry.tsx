@@ -1,20 +1,18 @@
-import { Box, Button, TextField } from '@mui/material';
-import { ChangeEvent, FC, useState, useContext } from 'react';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import SaveIcon from '@mui/icons-material/SaveOutlined';
-import { EntriesContext } from '../../../context/EntriesContext';
+import { Box, Button, TextField } from '@mui/material';
+import { ChangeEvent, FC, useContext, useState } from 'react';
+import { EntriesContext } from '../../context/Entries';
 
-type Props = {};
+type Props = {
+  onEntrySaved: (description: string) => void;
+};
 
-export const NewEntry: FC<Props> = ({}) => {
-  const { addNewEntry } = useContext(EntriesContext);
-  const [isAdding, setIsAdding] = useState(false);
+export const NewEntry: FC<Props> = ({ onEntrySaved }) => {
+  const [isAddingEntry, setIsAddingEntry] = useState(false);
+
   const [entryDescription, setEntryDescription] = useState('');
   const [touched, setTouched] = useState(false);
-
-  const toggleAdding = () => {
-    setIsAdding(!isAdding);
-  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTouched(true);
@@ -22,15 +20,16 @@ export const NewEntry: FC<Props> = ({}) => {
   };
 
   const resetForm = () => {
-    setIsAdding(false);
+    setIsAddingEntry(false);
     setTouched(false);
     setEntryDescription('');
   };
 
   const onSave = () => {
+    setTouched(true);
     if (entryDescription.length === 0) return;
 
-    addNewEntry(entryDescription);
+    onEntrySaved(entryDescription);
     resetForm();
   };
 
@@ -38,7 +37,7 @@ export const NewEntry: FC<Props> = ({}) => {
 
   return (
     <Box sx={{ marginBottom: 2, paddingX: 2 }}>
-      {isAdding ? (
+      {isAddingEntry ? (
         <>
           <TextField
             fullWidth
@@ -72,7 +71,7 @@ export const NewEntry: FC<Props> = ({}) => {
           startIcon={<AddIcon />}
           fullWidth
           variant="outlined"
-          onClick={toggleAdding}
+          onClick={() => setIsAddingEntry(true)}
         >
           Agregar tarea
         </Button>
