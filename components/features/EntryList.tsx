@@ -10,9 +10,15 @@ type Props = {
   title?: string;
   entries: Entry[];
   status: EntryStatus;
+  showAddEntry?: boolean;
 };
 
-export const EntryList: FC<Props> = ({ title, entries, status }) => {
+export const EntryList: FC<Props> = ({
+  title,
+  entries,
+  status,
+  showAddEntry = false,
+}) => {
   const {
     updateEntry,
     entries: allEntries,
@@ -52,7 +58,7 @@ export const EntryList: FC<Props> = ({ title, entries, status }) => {
     <Grid item xs={12} sm={4} display="flex">
       <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
         {title && <CardHeader title={title} />}
-        <NewEntry onEntrySaved={handleEntrySaved} />
+        {showAddEntry && <NewEntry onEntrySaved={handleEntrySaved} />}
         <div
           style={{ flexGrow: 1, height: 'calc(100vh - 250px)' }}
           onDrop={onDropEntry}

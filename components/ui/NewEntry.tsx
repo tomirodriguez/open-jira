@@ -1,8 +1,7 @@
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import SaveIcon from '@mui/icons-material/SaveOutlined';
 import { Box, Button, TextField } from '@mui/material';
-import { ChangeEvent, FC, useContext, useState } from 'react';
-import { EntriesContext } from '../../context/Entries';
+import { ChangeEvent, FC, useState } from 'react';
 
 type Props = {
   onEntrySaved: (description: string) => void;

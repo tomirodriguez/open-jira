@@ -10,7 +10,12 @@ const HomePage: NextPage = () => {
   return (
     <Layout title="Home - OpenJira">
       <Grid container spacing={2} flexGrow={1}>
-        <EntryList title="Pending" entries={pending} status={'pending'} />
+        <EntryList
+          title="Pending"
+          entries={pending}
+          status={'pending'}
+          showAddEntry
+        />
         <EntryList
           title="In Progress"
           entries={inProgress}

@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren, useReducer } from 'react';
-import { ENTRIES_MOCK } from '../../mocks';
+import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
+import { entriesApi } from '../../services';
 import { Entry } from '../../types';
 import { EntriesContext, entriesReducer } from './';
 
@@ -8,7 +8,7 @@ export interface EntriesState {
 }
 
 const Entries_INITIAL_STATE: EntriesState = {
-  entries: ENTRIES_MOCK,
+  entries: [],
 };
 
 export const EntriesProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -21,6 +21,16 @@ export const EntriesProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const updateEntry = (entry: Entry) => {
     dispatch({ type: '[Entry] - Update Entry', payload: entry });
   };
+
+  const refreshEntries = async () => {
+    const { data } = await entriesApi.get<Entry[]>('/entries');
+
+    dispatch({ type: '[Entry] - Load Entries', payload: data });
+  };
+
+  useEffect(() => {
+    refreshEntries();
+  }, []);
 
   return (
     <EntriesContext.Provider

@@ -10,7 +10,7 @@ const mongoConnection: MongoConnection = {
 
 export const connect = async () => {
   if (mongoConnection.connectionState === ConnectionStates.connected) {
-    console.log('CONECTADO');
+    console.log('Ya estamos conectados.');
     return;
   }
 
@@ -32,6 +32,8 @@ export const connect = async () => {
 };
 
 export const disconnect = async () => {
+  if (process.env.NODE_ENV === 'development') return;
+
   if (mongoConnection.connectionState === ConnectionStates.disconnected) return;
 
   await mongoose.disconnect();

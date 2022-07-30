@@ -2,7 +2,7 @@
 
 Para correr localmente, se necesita la base de datos
 
-```text
+```bash
 docker-compose up -d
 ```
 
@@ -10,10 +10,18 @@ docker-compose up -d
 
 MondoDB URL local:
 
-```text
+```bash
 mongodb://localhost:27017/entries-db
 ```
 
 ## Configurar las variables de entorno
 
 Utilizar el archivo __.env.example__ como template para generar el archivo __.env__
+
+## Llenar la base de datos con informacion de prueba
+
+Llamar a:
+
+```bash
+http://localhost:3000/api/seed
+```
