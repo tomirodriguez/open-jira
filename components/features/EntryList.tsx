@@ -4,7 +4,6 @@ import { EntriesContext } from '../../context/Entries';
 import { UIContext } from '../../context/UI';
 import { Entry, EntryStatus } from '../../types';
 import { EntryCard, NewEntry } from '../ui';
-import { v4 as uuid } from 'uuid';
 
 type Props = {
   title?: string;
@@ -32,8 +31,9 @@ export const EntryList: FC<Props> = ({
     const entry = allEntries.find((e) => e._id === id);
 
     if (entry) {
-      entry.status = status;
-      updateEntry(entry);
+      const { _id, description } = entry;
+
+      updateEntry({ _id, description, status });
     }
 
     stopDraggingEntry();
@@ -44,14 +44,7 @@ export const EntryList: FC<Props> = ({
   };
 
   const handleEntrySaved = (description: string) => {
-    const newEntry = {
-      _id: uuid(),
-      description,
-      createdAt: Date.now(),
-      status,
-    };
-
-    addNewEntry(newEntry);
+    addNewEntry(description);
   };
 
   return (

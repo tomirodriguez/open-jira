@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import { entriesApi } from '../../services';
 import { Entry } from '../../types';
-import { EntriesContext, entriesReducer } from './';
+import { EntriesContext, entriesReducer, UpdateEntryProps } from './';
 
 export interface EntriesState {
   entries: Entry[];
@@ -14,12 +14,26 @@ const Entries_INITIAL_STATE: EntriesState = {
 export const EntriesProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE);
 
-  const addNewEntry = (entry: Entry) => {
-    dispatch({ type: '[Entry] - Add-Entry', payload: entry });
+  const addNewEntry = async (description: string) => {
+    const { data } = await entriesApi.post<Entry>('/entries', { description });
+
+    dispatch({ type: '[Entry] - Add-Entry', payload: data });
   };
 
-  const updateEntry = (entry: Entry) => {
-    dispatch({ type: '[Entry] - Update Entry', payload: entry });
+  const updateEntry = async ({
+    _id,
+    description,
+    status,
+  }: UpdateEntryProps) => {
+    try {
+      const { data } = await entriesApi.patch(`/entries/${_id}`, {
+        description,
+        status,
+      });
+      dispatch({ type: '[Entry] - Update Entry', payload: data });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const refreshEntries = async () => {
