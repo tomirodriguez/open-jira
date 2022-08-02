@@ -9,6 +9,7 @@ import { DragEvent, FC, useContext } from 'react';
 import { Entry } from '../../types/entry';
 import { UIContext } from '../../context/UI';
 import Link from 'next/link';
+import { getFormatDistanceToNow } from '../../utils/dateFunctions';
 
 type Props = {
   entry: Entry;
@@ -37,8 +38,10 @@ export const EntryCard: FC<Props> = ({ entry }) => {
               {description}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Typography variant="body2"></Typography>
+          <CardActions sx={{ justifyContent: 'right' }}>
+            <Typography variant="body2">
+              Hace {getFormatDistanceToNow(entry.createdAt)}
+            </Typography>
           </CardActions>
         </CardActionArea>
       </Card>
