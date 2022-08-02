@@ -8,6 +8,7 @@ import {
 import { DragEvent, FC, useContext } from 'react';
 import { Entry } from '../../types/entry';
 import { UIContext } from '../../context/UI';
+import Link from 'next/link';
 
 type Props = {
   entry: Entry;
@@ -23,20 +24,24 @@ export const EntryCard: FC<Props> = ({ entry }) => {
   };
 
   return (
-    <Card
-      sx={{ marginBottom: 1 }}
-      draggable
-      onDragStart={onDragStart}
-      onDragEnd={stopDraggingEntry}
-    >
-      <CardActionArea>
-        <CardContent>
-          <Typography sx={{ whiteSpace: 'pre-line' }}>{description}</Typography>
-        </CardContent>
-        <CardActions>
-          <Typography variant="body2"></Typography>
-        </CardActions>
-      </CardActionArea>
-    </Card>
+    <Link href={`/entries/${entry._id}`}>
+      <Card
+        sx={{ marginBottom: 1 }}
+        draggable
+        onDragStart={onDragStart}
+        onDragEnd={stopDraggingEntry}
+      >
+        <CardActionArea>
+          <CardContent>
+            <Typography sx={{ whiteSpace: 'pre-line' }}>
+              {description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Typography variant="body2"></Typography>
+          </CardActions>
+        </CardActionArea>
+      </Card>
+    </Link>
   );
 };
